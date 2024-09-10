@@ -8,7 +8,6 @@
   <arg name="colors"/>
   <arg name="extensions" value="php,inc,test,yml"/>
 
-  <rule ref="PSR12"/>
   <rule ref="Drupal"/>
   <rule ref="DrupalPractice"/>
 
