@@ -1,0 +1,19 @@
+parameters:
+
+services:
+  # Default configuration for services in *this* file.
+  _defaults:
+    autowire: true
+    autoconfigure: true
+    public: true
+
+  # JsonValidateCommand
+  SchemaValidator\Command\Validation\JsonValidateCommand:
+    arguments: ['@schema_validator.validator']
+    tags: ['controller.service_arguments', 'console.command']
+
+  # ValidateCommand.
+  SchemaValidator\Validation\ValidatorInterface: '@schema_validator.validator'
+  schema_validator.validator:
+    autowire: true
+    class: 'SchemaValidator\Validation\JsonValidator'

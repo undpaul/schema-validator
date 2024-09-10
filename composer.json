@@ -1,5 +1,83 @@
 {
+    "name": "undpaul/schema-validator",
+    "description": "Simple wrapper around justinrainbow/json-schema JSON Schema validator.",
+    "type": "project",
+    "license": "GPL-3.0-only",
+    "minimum-stability": "stable",
+    "prefer-stable": true,
     "require": {
-        "justinrainbow/json-schema": "^6.0"
+        "php": ">=8.3.0",
+        "ext-ctype": "*",
+        "ext-iconv": "*",
+        "justinrainbow/json-schema": "^6.0",
+        "symfony/console": "7.1.*",
+        "symfony/dotenv": "7.1.*",
+        "symfony/flex": "^2",
+        "symfony/framework-bundle": "7.1.*",
+        "symfony/runtime": "7.1.*",
+        "symfony/yaml": "7.1.*"
+    },
+    "autoload": {
+        "psr-4": {
+            "SchemaValidator\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "SchemaValidator\\Tests\\": "tests/"
+        }
+    },
+    "bin": [
+        "schema-validator"
+    ],
+    "authors": [
+        {
+            "name": "Stefan Borchert",
+            "email": "stefan@undpaul.de"
+        }
+    ],
+    "config": {
+        "allow-plugins": {
+            "php-http/discovery": true,
+            "symfony/flex": true,
+            "symfony/runtime": true,
+            "dealerdirect/phpcodesniffer-composer-installer": true
+        },
+        "sort-packages": true
+    },
+    "replace": {
+        "symfony/polyfill-ctype": "*",
+        "symfony/polyfill-iconv": "*",
+        "symfony/polyfill-php72": "*",
+        "symfony/polyfill-php73": "*",
+        "symfony/polyfill-php74": "*",
+        "symfony/polyfill-php80": "*",
+        "symfony/polyfill-php81": "*",
+        "symfony/polyfill-php82": "*"
+    },
+    "scripts": {
+        "auto-scripts": {
+            "cache:clear": "symfony-cmd",
+            "assets:install %PUBLIC_DIR%": "symfony-cmd"
+        },
+        "post-install-cmd": [
+            "@auto-scripts"
+        ],
+        "post-update-cmd": [
+            "@auto-scripts"
+        ]
+    },
+    "conflict": {
+        "symfony/symfony": "*"
+    },
+    "extra": {
+        "symfony": {
+            "allow-contrib": false,
+            "require": "7.1.*"
+        }
+    },
+    "require-dev": {
+        "drupal/coder": "^8.3",
+        "squizlabs/php_codesniffer": "^3.10"
     }
 }
