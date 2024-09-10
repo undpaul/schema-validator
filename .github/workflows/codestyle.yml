@@ -6,7 +6,7 @@ jobs:
   phpstan:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - uses: php-actions/composer@v6
 
       - name: PHPStan Static Analysis
@@ -14,3 +14,10 @@ jobs:
         with:
           path: src/ tests/
           level: max
+
+  phpcs-drupal:
+    name: Drupal coding standards
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: guix77/phpcs-drupal-action@php8.3
