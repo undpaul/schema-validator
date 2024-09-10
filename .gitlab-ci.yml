@@ -1,0 +1,24 @@
+# Gitlab CI integration
+
+default:
+  image: registry.gitlab.com/${CI_PROJECT_ROOT_NAMESPACE}/devops/docker-images/alpine-php:8.3-latest
+  tags:
+    - runner-low
+
+variables:
+  APP_ENV: "test"
+  CODE_EXTENSIONS: "php,module,inc,install,test,profile,theme"
+  CODE_STANDARDS: "Drupal,DrupalPractice"
+  CODE_SNIFFER_REPORT_PATH: "${CI_PROJECT_DIR}/php_code_sniffer_report.xml"
+
+stages:
+  - build
+  - test
+  - release
+
+include:
+  - local: '.gitlab-ci/**.yml'
+  - local: '.gitlab-ci/**/**.yml'
+
+before_script:
+  - export PATH="${CI_PROJECT_DIR}/bin:${CI_PROJECT_DIR}/vendor/bin:$PATH"
