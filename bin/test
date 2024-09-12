@@ -1,0 +1,16 @@
+#!/bin/bash
+
+# Read the current value of XDEBUG_MODE
+original_value=$XDEBUG_MODE
+
+# Set environment variable.
+export XDEBUG_MODE=coverage
+
+# Start ChromeDriver process.
+nohup chromedriver --log-path=/var/www/html/tmp/chromedriver.log --port=9515 &> /dev/null &
+
+# Run phpunit tests.
+php bin/phpunit tests --coverage-html=cov/ > /dev/null && coverage=$(sed -n 's/.*<div align="right">\([^<]*\).*/\1/p' cov/index.html | head -n 1) && echo "Coverage: $coverage"
+
+# Restore the original value of XDEBUG_MODE
+export XDEBUG_MODE="$original_value"
