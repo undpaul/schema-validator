@@ -3,6 +3,7 @@
 namespace SchemaValidator\Command;
 
 use SchemaValidator\Attribute\AsCommand;
+use SchemaValidator\Attribute\AttributeReaderTrait;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -14,6 +15,8 @@ use Symfony\Component\Console\Output\OutputInterface;
  */
 abstract class CommandBase extends Command implements CommandInterface {
 
+  use AttributeReaderTrait;
+
   /**
    * {@inheritdoc}
    *
@@ -21,12 +24,9 @@ abstract class CommandBase extends Command implements CommandInterface {
    */
   #[\Override]
   public static function getDefaultName(): ?string {
-    $attribute = (new \ReflectionClass(static::class))->getAttributes(AsCommand::class);
-    if ($attribute) {
-      return $attribute[0]->newInstance()->name;
-    }
+    $attribute_values = static::readAttributeArguments(AsCommand::class);
 
-    return NULL;
+    return $attribute_values['name'] ?? NULL;
   }
 
   /**
@@ -36,12 +36,9 @@ abstract class CommandBase extends Command implements CommandInterface {
    */
   #[\Override]
   public static function getDefaultDescription(): ?string {
-    $attribute = (new \ReflectionClass(static::class))->getAttributes(AsCommand::class);
-    if ($attribute) {
-      return $attribute[0]->newInstance()->description;
-    }
+    $attribute_values = static::readAttributeArguments(AsCommand::class);
 
-    return NULL;
+    return $attribute_values['description'] ?? NULL;
   }
 
   /**
@@ -120,14 +117,10 @@ abstract class CommandBase extends Command implements CommandInterface {
    */
   #[\Override]
   public function getArgumentDefinitions(): array {
-    $arguments = [];
-
-    $attribute = (new \ReflectionClass(static::class))->getAttributes(AsCommand::class);
-    if ($attribute) {
-      $arguments = array_merge($arguments, $attribute[0]->newInstance()->arguments);
-    }
+    $attribute_values = static::readAttributeArguments(AsCommand::class);
 
     /** @var array<string, array<string, int|string>|string> $arguments */
+    $arguments = $attribute_values['arguments'] ?? [];
     return $arguments;
   }
 
@@ -136,14 +129,10 @@ abstract class CommandBase extends Command implements CommandInterface {
    */
   #[\Override]
   public function getOptionDefinitions(): array {
-    $options = [];
-
-    $attribute = (new \ReflectionClass(static::class))->getAttributes(AsCommand::class);
-    if ($attribute) {
-      $options = array_merge($options, $attribute[0]->newInstance()->options);
-    }
+    $attribute_values = static::readAttributeArguments(AsCommand::class);
 
     /** @var array<string, array<string, int|string>|string> $options */
+    $options = $attribute_values['options'] ?? [];
     return $options;
   }
 
