@@ -24,7 +24,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "SchemaValidator\\Tests\\": "tests/"
+            "SchemaValidator\\Tests\\": "tests/phpunit/src/"
         }
     },
     "bin": [
@@ -78,6 +78,10 @@
     },
     "require-dev": {
         "drupal/coder": "^8.3",
-        "squizlabs/php_codesniffer": "^3.10"
+        "phpunit/phpunit": "^9.5",
+        "squizlabs/php_codesniffer": "^3.10",
+        "symfony/browser-kit": "7.1.*",
+        "symfony/css-selector": "7.1.*",
+        "symfony/phpunit-bridge": "^7.1"
     }
 }
