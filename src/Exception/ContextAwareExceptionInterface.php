@@ -8,6 +8,19 @@ namespace SchemaValidator\Exception;
 interface ContextAwareExceptionInterface {
 
   /**
+   * Add a context value to the exception.
+   *
+   * @param string $name
+   *   Name of context value.
+   * @param mixed $value
+   *   Context value.
+   *
+   * @return static
+   *   The current exception for method chaining.
+   */
+  public function addContext(string $name, mixed $value): static;
+
+  /**
    * Set additional data to the exception.
    *
    * @param array<string, mixed> $context

@@ -18,6 +18,16 @@ abstract class ContextAwareException extends \Exception implements ContextAwareE
    * {@inheritdoc}
    */
   #[\Override]
+  public function addContext(string $name, mixed $value): static {
+    $this->context[$name] = $value;
+
+    return $this;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  #[\Override]
   public function setContext(array $context): static {
     $this->context = $context;
 

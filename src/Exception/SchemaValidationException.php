@@ -16,6 +16,8 @@ class SchemaValidationException extends ContextAwareException {
    *   List of validation errors.
    */
   public function __construct(string $schema, array $errors) {
+    $this->addContext('errors', $errors);
+
     $message = strtr('The given JSON content does not validate against schema "!schema".', ['!schema' => $schema]) . PHP_EOL;
 
     // Add errors to message.

@@ -61,7 +61,7 @@ class JsonValidateCommand extends CommandBase {
 
     $this->validator->isValid($json, $schema);
 
-    if (!$output->isQuiet()) {
+    if (!$output->isQuiet() && ($input->getOption('quiet') !== TRUE)) {
       $output->writeln('valid');
     }
 

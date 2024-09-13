@@ -26,7 +26,10 @@ abstract class CommandBase extends Command implements CommandInterface {
   public static function getDefaultName(): ?string {
     $attribute_values = static::readAttributeArguments(AsCommand::class);
 
-    return $attribute_values['name'] ?? NULL;
+    /** @var string|null $name */
+    $name = $attribute_values['name'] ?? NULL;
+
+    return $name;
   }
 
   /**
@@ -38,7 +41,10 @@ abstract class CommandBase extends Command implements CommandInterface {
   public static function getDefaultDescription(): ?string {
     $attribute_values = static::readAttributeArguments(AsCommand::class);
 
-    return $attribute_values['description'] ?? NULL;
+    /** @var string|null $description */
+    $description = $attribute_values['description'] ?? NULL;
+
+    return $description;
   }
 
   /**

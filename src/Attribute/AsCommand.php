@@ -6,6 +6,8 @@ use Symfony\Component\Console\Attribute\AsCommand as SymfonyCommand;
 
 /**
  * Service tag to autoconfigure commands.
+ *
+ * @codeCoverageIgnore
  */
 #[\Attribute(\Attribute::TARGET_CLASS)]
 class AsCommand extends SymfonyCommand {
